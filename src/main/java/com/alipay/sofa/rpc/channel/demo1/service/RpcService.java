@@ -8,6 +8,6 @@ package com.alipay.sofa.rpc.channel.demo1.service;
  * @author bystander
  * @version $Id: CountService.java, v 0.1 2019年02月12日 17:17 bystander Exp $
  */
-public interface CountService {
-    int count();
+public interface RpcService {
+    int sayHello();
 }

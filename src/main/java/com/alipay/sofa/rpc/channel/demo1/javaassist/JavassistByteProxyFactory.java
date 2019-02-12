@@ -5,7 +5,7 @@
 package com.alipay.sofa.rpc.channel.demo1.javaassist;
 
 import com.alipay.sofa.rpc.channel.demo1.factory.DynamicProxyFactory;
-import com.alipay.sofa.rpc.channel.demo1.service.CountService;
+import com.alipay.sofa.rpc.channel.demo1.service.RpcService;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtField;
@@ -29,11 +29,11 @@ public class JavassistByteProxyFactory implements DynamicProxyFactory {
         T bytecodeProxy = null;
         try {
             ClassPool mPool = new ClassPool(true);
-            CtClass mCtc = mPool.makeClass(CountService.class.getName() + "JavaassistProxy" + atomicLong.incrementAndGet());
-            mCtc.addInterface(mPool.get(CountService.class.getName()));
+            CtClass mCtc = mPool.makeClass(RpcService.class.getName() + "JavaassistProxy" + atomicLong.incrementAndGet());
+            mCtc.addInterface(mPool.get(RpcService.class.getName()));
             mCtc.addConstructor(CtNewConstructor.defaultConstructor(mCtc));
-            mCtc.addField(CtField.make("public " + CountService.class.getName() + " delegate;", mCtc));
-            mCtc.addMethod(CtNewMethod.make("public int count() { return delegate.count(); }", mCtc));
+            mCtc.addField(CtField.make("public " + RpcService.class.getName() + " delegate;", mCtc));
+            mCtc.addMethod(CtNewMethod.make("public int sayHello() { return delegate.sayHello(); }", mCtc));
             Class pc = mCtc.toClass();
             bytecodeProxy = (T) pc.newInstance();
             Field filed = bytecodeProxy.getClass().getField("delegate");

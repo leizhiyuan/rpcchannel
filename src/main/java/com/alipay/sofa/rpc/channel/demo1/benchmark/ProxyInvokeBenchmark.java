@@ -11,8 +11,8 @@ import com.alipay.sofa.rpc.channel.demo1.factory.DynamicProxyFactory;
 import com.alipay.sofa.rpc.channel.demo1.javaassist.JavassistByteProxyFactory;
 import com.alipay.sofa.rpc.channel.demo1.javaassist.JavassistProxyFactory;
 import com.alipay.sofa.rpc.channel.demo1.jdk.JdkProxyFactory;
-import com.alipay.sofa.rpc.channel.demo1.service.CountService;
-import com.alipay.sofa.rpc.channel.demo1.service.impl.CountServiceImpl;
+import com.alipay.sofa.rpc.channel.demo1.service.RpcService;
+import com.alipay.sofa.rpc.channel.demo1.service.impl.RpcServiceImpl;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;
@@ -41,45 +41,45 @@ public class ProxyInvokeBenchmark {
     private DynamicProxyFactory asmProxyFactory = new AsmProxyFactory();
     private DynamicProxyFactory byteBuddyProxyFactory = new BytebuddyProxyFactory();
 
-    private CountService delegate = new CountServiceImpl();
-    CountService jkdProxy = jdkProxyFactory.createProxy(CountService.class, delegate);
-    CountService cglibProxy = cglibProxyFactory.createProxy(CountService.class, delegate);
-    CountService javassistProxy = javassistProxyFactory.createProxy(CountService.class, delegate);
-    CountService javassistByteProxy = javassistByteProxyFactory.createProxy(CountService.class, delegate);
-    CountService bytebuddyProxy = byteBuddyProxyFactory.createProxy(CountService.class, delegate);
-    CountService asmProxy = asmProxyFactory.createProxy(CountService.class, delegate);
+    private RpcService delegate = new RpcServiceImpl();
+    RpcService jkdProxy = jdkProxyFactory.createProxy(RpcService.class, delegate);
+    RpcService cglibProxy = cglibProxyFactory.createProxy(RpcService.class, delegate);
+    RpcService javassistProxy = javassistProxyFactory.createProxy(RpcService.class, delegate);
+    RpcService javassistByteProxy = javassistByteProxyFactory.createProxy(RpcService.class, delegate);
+    RpcService bytebuddyProxy = byteBuddyProxyFactory.createProxy(RpcService.class, delegate);
+    RpcService asmProxy = asmProxyFactory.createProxy(RpcService.class, delegate);
 
     @Benchmark
-    public void createProxyByJdk() {
-        jkdProxy.count();
+    public void invokeByJdk() {
+        jkdProxy.sayHello();
     }
 
     @Benchmark
-    public void createProxyByCglib() {
-        cglibProxy.count();
-
-    }
-
-    @Benchmark
-    public void createProxyByJavassist() {
-        javassistProxy.count();
+    public void invokeByCglib() {
+        cglibProxy.sayHello();
 
     }
 
     @Benchmark
-    public void createProxyByJavassistByte() {
-        javassistByteProxy.count();
-    }
-
-    @Benchmark
-    public void createProxyByBytebuddy() {
-        bytebuddyProxy.count();
+    public void invokeByJavassist() {
+        javassistProxy.sayHello();
 
     }
 
     @Benchmark
-    public void createProxyByAsm() {
-        asmProxy.count();
+    public void invokeByJavassistByte() {
+        javassistByteProxy.sayHello();
+    }
+
+    @Benchmark
+    public void invokeByBytebuddy() {
+        bytebuddyProxy.sayHello();
+
+    }
+
+    @Benchmark
+    public void invokeByAsm() {
+        asmProxy.sayHello();
     }
 
     public static void main(String[] args) throws RunnerException {

@@ -35,11 +35,11 @@ public class AsmProxyFactory implements DynamicProxyFactory {
         FieldVisitor fieldVisitor = classWriter.visitField(Opcodes.ACC_PUBLIC, "delegate", "L" + interfacePath + ";", null, null);
         fieldVisitor.visitEnd();
 
-        MethodVisitor methodVisitor = classWriter.visitMethod(Opcodes.ACC_PUBLIC, "count", "()I", null, null);
+        MethodVisitor methodVisitor = classWriter.visitMethod(Opcodes.ACC_PUBLIC, "sayHello", "()I", null, null);
         methodVisitor.visitCode();
         methodVisitor.visitVarInsn(Opcodes.ALOAD, 0);
         methodVisitor.visitFieldInsn(Opcodes.GETFIELD, classPath, "delegate", "L" + interfacePath + ";");
-        methodVisitor.visitMethodInsn(Opcodes.INVOKEINTERFACE, interfacePath, "count", "()I");
+        methodVisitor.visitMethodInsn(Opcodes.INVOKEINTERFACE, interfacePath, "sayHello", "()I");
         methodVisitor.visitInsn(Opcodes.IRETURN);
         methodVisitor.visitMaxs(0, 0);
         methodVisitor.visitEnd();

@@ -5,7 +5,7 @@
 package com.alipay.sofa.rpc.channel.demo1.jdk;
 
 import com.alipay.sofa.rpc.channel.demo1.factory.DynamicProxyFactory;
-import com.alipay.sofa.rpc.channel.demo1.service.CountService;
+import com.alipay.sofa.rpc.channel.demo1.service.RpcService;
 
 import java.lang.reflect.Proxy;
 
@@ -16,7 +16,7 @@ import java.lang.reflect.Proxy;
 public class JdkProxyFactory implements DynamicProxyFactory {
     public <T> T createProxy(Class<T> type, Object delegate) {
         T jdkProxy = (T) Proxy.newProxyInstance(ClassLoader.getSystemClassLoader(),
-                new Class[]{CountService.class}, new JdkHandler(delegate));
+                new Class[]{RpcService.class}, new JdkHandler(delegate));
 
         return jdkProxy;
     }

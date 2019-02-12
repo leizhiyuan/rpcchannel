@@ -5,7 +5,7 @@
 package com.alipay.sofa.rpc.channel.demo1.cglib;
 
 import com.alipay.sofa.rpc.channel.demo1.factory.DynamicProxyFactory;
-import com.alipay.sofa.rpc.channel.demo1.service.CountService;
+import com.alipay.sofa.rpc.channel.demo1.service.RpcService;
 import net.sf.cglib.proxy.Enhancer;
 
 /**
@@ -16,7 +16,7 @@ public class CglibProxyFactory implements DynamicProxyFactory {
     public <T> T createProxy(Class<T> type, Object delegate) {
         Enhancer enhancer = new Enhancer();
         enhancer.setCallback(new CglibInterceptor(delegate));
-        enhancer.setInterfaces(new Class[]{CountService.class});
+        enhancer.setInterfaces(new Class[]{RpcService.class});
         T cglibProxy = (T) enhancer.create();
         return cglibProxy;
     }
