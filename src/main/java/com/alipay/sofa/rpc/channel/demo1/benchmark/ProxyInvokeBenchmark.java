@@ -42,12 +42,12 @@ public class ProxyInvokeBenchmark {
     private DynamicProxyFactory byteBuddyProxyFactory = new BytebuddyProxyFactory();
 
     private RpcService delegate = new RpcServiceImpl();
-    RpcService jkdProxy = jdkProxyFactory.createProxy(RpcService.class, delegate);
-    RpcService cglibProxy = cglibProxyFactory.createProxy(RpcService.class, delegate);
-    RpcService javassistProxy = javassistProxyFactory.createProxy(RpcService.class, delegate);
-    RpcService javassistByteProxy = javassistByteProxyFactory.createProxy(RpcService.class, delegate);
-    RpcService bytebuddyProxy = byteBuddyProxyFactory.createProxy(RpcService.class, delegate);
-    RpcService asmProxy = asmProxyFactory.createProxy(RpcService.class, delegate);
+    private RpcService jkdProxy = jdkProxyFactory.createProxy(RpcService.class, delegate);
+    private RpcService cglibProxy = cglibProxyFactory.createProxy(RpcService.class, delegate);
+    private RpcService javassistProxy = javassistProxyFactory.createProxy(RpcService.class, delegate);
+    private RpcService javassistByteProxy = javassistByteProxyFactory.createProxy(RpcService.class, delegate);
+    private RpcService bytebuddyProxy = byteBuddyProxyFactory.createProxy(RpcService.class, delegate);
+    private RpcService asmProxy = asmProxyFactory.createProxy(RpcService.class, delegate);
 
     @Benchmark
     public void invokeByJdk() {
