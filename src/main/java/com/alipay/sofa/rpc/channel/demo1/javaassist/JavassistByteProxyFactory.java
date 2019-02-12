@@ -13,17 +13,23 @@ import javassist.CtNewConstructor;
 import javassist.CtNewMethod;
 
 import java.lang.reflect.Field;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * @author bystander
  * @version $Id: JavassistProxyFactory.java, v 0.1 2019年02月12日 17:57 bystander Exp $
  */
 public class JavassistByteProxyFactory implements DynamicProxyFactory {
+
+
+    //only for benchmark
+    private AtomicLong atomicLong = new AtomicLong(0);
+
     public <T> T createProxy(Class<T> type, Object delegate) {
         T bytecodeProxy = null;
         try {
             ClassPool mPool = new ClassPool(true);
-            CtClass mCtc = mPool.makeClass(CountService.class.getName() + "JavaassistProxy");
+            CtClass mCtc = mPool.makeClass(CountService.class.getName() + "JavaassistProxy" + atomicLong.incrementAndGet());
             mCtc.addInterface(mPool.get(CountService.class.getName()));
             mCtc.addConstructor(CtNewConstructor.defaultConstructor(mCtc));
             mCtc.addField(CtField.make("public " + CountService.class.getName() + " delegate;", mCtc));

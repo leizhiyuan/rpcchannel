@@ -49,31 +49,6 @@ public class BytebuddyInvocationHandler {
     @RuntimeType
     public Object byteBuddyInvoke(@This Object proxy, @Origin Method method, @AllArguments @RuntimeType Object[] args)
             throws Throwable {
-        String name = method.getName();
-        if ("equals".equals(name)) {
-            Object another = args[0];
-            return proxy == another ||
-                    (proxy.getClass().isInstance(another) && delegate.equals(parseInvoker(another)));
-        } else if ("hashCode".equals(name)) {
-            return delegate.hashCode();
-        } else if ("toString".equals(name)) {
-            return delegate.toString();
-        }
-
         return method.invoke(delegate, args);
-    }
-
-    private Object parseInvoker(Object another) {
-        try {
-            Field field = another.getClass().getField("handler");
-            if (!field.isAccessible()) {
-                field.setAccessible(true);
-            }
-            BytebuddyInvocationHandler interceptor = (BytebuddyInvocationHandler) field.get(another);
-
-            return interceptor.getDelegate();
-        } catch (Exception e) {
-            return null;
-        }
     }
 }
