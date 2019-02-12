@@ -5,6 +5,7 @@
 package com.alipay.sofa.rpc.channel.demo1;
 
 import com.alipay.sofa.rpc.channel.demo1.asm.AsmProxyFactory;
+import com.alipay.sofa.rpc.channel.demo1.bytebuddy.BytebuddyProxyFactory;
 import com.alipay.sofa.rpc.channel.demo1.cglib.CglibProxyFactory;
 import com.alipay.sofa.rpc.channel.demo1.factory.DynamicProxyFactory;
 import com.alipay.sofa.rpc.channel.demo1.javaassist.JavassistByteProxyFactory;
@@ -57,6 +58,14 @@ public class DynamicProxyPerformanceStarter {
         CountService asmBytecodeProxy = asmProxyFactory.createProxy(CountService.class, delegate);
         time = System.currentTimeMillis() - time;
         System.out.println("Create ASM Proxy: " + time + " ms");
+
+
+        time = System.currentTimeMillis();
+        DynamicProxyFactory byteBuddyProxyFactory = new BytebuddyProxyFactory();
+        CountService byteBuddycodeProxy = byteBuddyProxyFactory.createProxy(CountService.class, delegate);
+        time = System.currentTimeMillis() - time;
+        System.out.println("Create Bytebuddy Proxy: " + time + " ms");
+
         System.out.println("================================================");
 
         for (int i = 0; i < 3; i++) {
@@ -65,6 +74,7 @@ public class DynamicProxyPerformanceStarter {
             test(javassistProxy, "Run JAVAASSIST Proxy: ");
             test(javassistBytecodeProxy, "Run JAVAASSIST Bytecode Proxy: ");
             test(asmBytecodeProxy, "Run ASM Bytecode Proxy: ");
+            test(byteBuddycodeProxy, "Run Bytebuddy Proxy: ");
             System.out.println("------------------------------------------------");
         }
     }
