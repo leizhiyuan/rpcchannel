@@ -2,13 +2,13 @@
  * Alipay.com Inc.
  * Copyright (c) 2004-2019 All Rights Reserved.
  */
-package com.alipay.sofa.rpc.channel.demo2.bolt.benchmark;
+package com.alipay.sofa.rpc.channel.demo2.benchmark;
 
 import com.alipay.remoting.exception.RemotingException;
 import com.alipay.remoting.rpc.RpcClient;
 import com.alipay.remoting.rpc.RpcServer;
 import com.alipay.sofa.rpc.channel.demo2.bolt.model.RequestBody;
-import com.alipay.sofa.rpc.channel.demo2.bolt.model.SimpleServerUserProcessor;
+import com.alipay.sofa.rpc.channel.demo2.processor.SimpleServerUserProcessor;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;

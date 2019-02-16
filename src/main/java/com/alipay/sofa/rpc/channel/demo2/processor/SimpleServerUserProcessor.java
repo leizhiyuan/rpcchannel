@@ -14,12 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.alipay.sofa.rpc.channel.demo2.bolt.model;
+package com.alipay.sofa.rpc.channel.demo2.processor;
 
 import com.alipay.remoting.BizContext;
 import com.alipay.remoting.InvokeContext;
 import com.alipay.remoting.NamedThreadFactory;
 import com.alipay.remoting.rpc.protocol.SyncUserProcessor;
+import com.alipay.sofa.rpc.channel.demo2.bolt.model.RequestBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
